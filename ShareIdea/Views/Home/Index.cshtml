@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<button class="linkButton" onclick="location.href = '/Idea/Create'">Создать идею</button>
+<table class="table_blur">
+    <tr>
+        <th>Название</th>
+        <th>Описание</th>
+    </tr>
+    @foreach (var idea in ViewBag.ListOfIdeas)
+    {
+        <tr>
+            <td>@idea.title</td>
+            <td>@idea.description</td>
+        </tr>
+    }
+    
+</table>
