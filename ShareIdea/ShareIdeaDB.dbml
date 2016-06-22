@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ShareIdea" Class="ShareIdeaDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=EPRUSARW1092\SQLEXPRESS;Initial Catalog=ShareIdea;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ShareIdeaConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Choices" Member="Choices">
-    <Type Name="Choice">
+  <Table Name="dbo.Voices" Member="Voices">
+    <Type Name="Voice">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="NChar(150)" CanBeNull="true" />
-      <Column Name="description" Type="System.String" DbType="NChar(150)" CanBeNull="true" />
+      <Column Name="idChoice" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Value" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Ideas" Member="Ideas">
@@ -15,11 +15,27 @@
       <Column Name="choices" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Voices" Member="Voices">
-    <Type Name="Voice">
+  <Table Name="dbo.IdeaComments" Member="IdeaComments">
+    <Type Name="IdeaComment">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idIdea" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idUser" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="text" Type="System.String" DbType="NChar(200)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Choices" Member="Choices">
+    <Type Name="Choice">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NChar(150)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="NChar(150)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ChoiceComments" Member="ChoiceComments">
+    <Type Name="ChoiceComment">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="idChoice" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Value" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idUser" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="text" Type="System.String" DbType="NChar(200)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

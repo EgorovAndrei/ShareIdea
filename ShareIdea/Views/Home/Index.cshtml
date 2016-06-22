@@ -2,6 +2,7 @@
     ViewBag.Title = "Home Page";
 }
 <button class="linkButton" onclick="location.href = '/Idea/Create'">Создать идею</button>
+@Html.ActionLink("tmp", "Index", "Idea")
 <table class="table_blur">
     <tr>
         <th>Название</th>
@@ -10,7 +11,7 @@
     @foreach (var idea in ViewBag.ListOfIdeas)
     {
         <tr>
-            <td>@idea.title</td>
+            <td><a href="/Idea/Index?id=@idea.id">@idea.title</a></td>
             <td>@idea.description</td>
         </tr>
     }

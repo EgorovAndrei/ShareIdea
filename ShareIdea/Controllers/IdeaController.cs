@@ -11,9 +11,10 @@ namespace ShareIdea.Controllers
         //
         // GET: /Idea/
 
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            return View();
+            var idea = ShareIdea.Models.IdeaModel.GetIdea(id);
+            return View(idea);
         }
 
         //

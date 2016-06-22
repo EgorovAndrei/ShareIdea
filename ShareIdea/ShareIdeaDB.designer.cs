@@ -30,15 +30,21 @@ namespace ShareIdea
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertChoice(Choice instance);
-    partial void UpdateChoice(Choice instance);
-    partial void DeleteChoice(Choice instance);
-    partial void InsertIdea(Idea instance);
-    partial void UpdateIdea(Idea instance);
-    partial void DeleteIdea(Idea instance);
     partial void InsertVoice(Voice instance);
     partial void UpdateVoice(Voice instance);
     partial void DeleteVoice(Voice instance);
+    partial void InsertIdea(Idea instance);
+    partial void UpdateIdea(Idea instance);
+    partial void DeleteIdea(Idea instance);
+    partial void InsertIdeaComment(IdeaComment instance);
+    partial void UpdateIdeaComment(IdeaComment instance);
+    partial void DeleteIdeaComment(IdeaComment instance);
+    partial void InsertChoice(Choice instance);
+    partial void UpdateChoice(Choice instance);
+    partial void DeleteChoice(Choice instance);
+    partial void InsertChoiceComment(ChoiceComment instance);
+    partial void UpdateChoiceComment(ChoiceComment instance);
+    partial void DeleteChoiceComment(ChoiceComment instance);
     #endregion
 		
 		public ShareIdeaDBDataContext() : 
@@ -71,11 +77,11 @@ namespace ShareIdea
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Choice> Choices
+		public System.Data.Linq.Table<Voice> Voices
 		{
 			get
 			{
-				return this.GetTable<Choice>();
+				return this.GetTable<Voice>();
 			}
 		}
 		
@@ -87,26 +93,42 @@ namespace ShareIdea
 			}
 		}
 		
-		public System.Data.Linq.Table<Voice> Voices
+		public System.Data.Linq.Table<IdeaComment> IdeaComments
 		{
 			get
 			{
-				return this.GetTable<Voice>();
+				return this.GetTable<IdeaComment>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Choice> Choices
+		{
+			get
+			{
+				return this.GetTable<Choice>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ChoiceComment> ChoiceComments
+		{
+			get
+			{
+				return this.GetTable<ChoiceComment>();
 			}
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Choices")]
-	public partial class Choice : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Voices")]
+	public partial class Voice : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _id;
 		
-		private string _title;
+		private System.Nullable<int> _idChoice;
 		
-		private string _description;
+		private System.Nullable<int> _Value;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -114,13 +136,13 @@ namespace ShareIdea
     partial void OnCreated();
     partial void OnidChanging(int value);
     partial void OnidChanged();
-    partial void OntitleChanging(string value);
-    partial void OntitleChanged();
-    partial void OndescriptionChanging(string value);
-    partial void OndescriptionChanged();
+    partial void OnidChoiceChanging(System.Nullable<int> value);
+    partial void OnidChoiceChanged();
+    partial void OnValueChanging(System.Nullable<int> value);
+    partial void OnValueChanged();
     #endregion
 		
-		public Choice()
+		public Voice()
 		{
 			OnCreated();
 		}
@@ -145,42 +167,42 @@ namespace ShareIdea
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NChar(150)")]
-		public string title
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idChoice", DbType="Int")]
+		public System.Nullable<int> idChoice
 		{
 			get
 			{
-				return this._title;
+				return this._idChoice;
 			}
 			set
 			{
-				if ((this._title != value))
+				if ((this._idChoice != value))
 				{
-					this.OntitleChanging(value);
+					this.OnidChoiceChanging(value);
 					this.SendPropertyChanging();
-					this._title = value;
-					this.SendPropertyChanged("title");
-					this.OntitleChanged();
+					this._idChoice = value;
+					this.SendPropertyChanged("idChoice");
+					this.OnidChoiceChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NChar(150)")]
-		public string description
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Value", DbType="Int")]
+		public System.Nullable<int> Value
 		{
 			get
 			{
-				return this._description;
+				return this._Value;
 			}
 			set
 			{
-				if ((this._description != value))
+				if ((this._Value != value))
 				{
-					this.OndescriptionChanging(value);
+					this.OnValueChanging(value);
 					this.SendPropertyChanging();
-					this._description = value;
-					this.SendPropertyChanged("description");
-					this.OndescriptionChanged();
+					this._Value = value;
+					this.SendPropertyChanged("Value");
+					this.OnValueChanged();
 				}
 			}
 		}
@@ -340,8 +362,252 @@ namespace ShareIdea
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Voices")]
-	public partial class Voice : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.IdeaComments")]
+	public partial class IdeaComment : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private System.Nullable<int> _idIdea;
+		
+		private System.Nullable<int> _idUser;
+		
+		private string _text;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnidIdeaChanging(System.Nullable<int> value);
+    partial void OnidIdeaChanged();
+    partial void OnidUserChanging(System.Nullable<int> value);
+    partial void OnidUserChanged();
+    partial void OntextChanging(string value);
+    partial void OntextChanged();
+    #endregion
+		
+		public IdeaComment()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idIdea", DbType="Int")]
+		public System.Nullable<int> idIdea
+		{
+			get
+			{
+				return this._idIdea;
+			}
+			set
+			{
+				if ((this._idIdea != value))
+				{
+					this.OnidIdeaChanging(value);
+					this.SendPropertyChanging();
+					this._idIdea = value;
+					this.SendPropertyChanged("idIdea");
+					this.OnidIdeaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUser", DbType="Int")]
+		public System.Nullable<int> idUser
+		{
+			get
+			{
+				return this._idUser;
+			}
+			set
+			{
+				if ((this._idUser != value))
+				{
+					this.OnidUserChanging(value);
+					this.SendPropertyChanging();
+					this._idUser = value;
+					this.SendPropertyChanged("idUser");
+					this.OnidUserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_text", DbType="NChar(200)")]
+		public string text
+		{
+			get
+			{
+				return this._text;
+			}
+			set
+			{
+				if ((this._text != value))
+				{
+					this.OntextChanging(value);
+					this.SendPropertyChanging();
+					this._text = value;
+					this.SendPropertyChanged("text");
+					this.OntextChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Choices")]
+	public partial class Choice : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _title;
+		
+		private string _description;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void OndescriptionChanging(string value);
+    partial void OndescriptionChanged();
+    #endregion
+		
+		public Choice()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NChar(150)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NChar(150)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this.OndescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._description = value;
+					this.SendPropertyChanged("description");
+					this.OndescriptionChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ChoiceComments")]
+	public partial class ChoiceComment : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -350,7 +616,9 @@ namespace ShareIdea
 		
 		private System.Nullable<int> _idChoice;
 		
-		private System.Nullable<int> _Value;
+		private System.Nullable<int> _idUser;
+		
+		private string _text;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -360,11 +628,13 @@ namespace ShareIdea
     partial void OnidChanged();
     partial void OnidChoiceChanging(System.Nullable<int> value);
     partial void OnidChoiceChanged();
-    partial void OnValueChanging(System.Nullable<int> value);
-    partial void OnValueChanged();
+    partial void OnidUserChanging(System.Nullable<int> value);
+    partial void OnidUserChanged();
+    partial void OntextChanging(string value);
+    partial void OntextChanged();
     #endregion
 		
-		public Voice()
+		public ChoiceComment()
 		{
 			OnCreated();
 		}
@@ -409,22 +679,42 @@ namespace ShareIdea
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Value", DbType="Int")]
-		public System.Nullable<int> Value
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUser", DbType="Int")]
+		public System.Nullable<int> idUser
 		{
 			get
 			{
-				return this._Value;
+				return this._idUser;
 			}
 			set
 			{
-				if ((this._Value != value))
+				if ((this._idUser != value))
 				{
-					this.OnValueChanging(value);
+					this.OnidUserChanging(value);
 					this.SendPropertyChanging();
-					this._Value = value;
-					this.SendPropertyChanged("Value");
-					this.OnValueChanged();
+					this._idUser = value;
+					this.SendPropertyChanged("idUser");
+					this.OnidUserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_text", DbType="NChar(200)")]
+		public string text
+		{
+			get
+			{
+				return this._text;
+			}
+			set
+			{
+				if ((this._text != value))
+				{
+					this.OntextChanging(value);
+					this.SendPropertyChanging();
+					this._text = value;
+					this.SendPropertyChanged("text");
+					this.OntextChanged();
 				}
 			}
 		}

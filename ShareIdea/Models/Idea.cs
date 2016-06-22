@@ -16,6 +16,20 @@ namespace ShareIdea.Models
         public string Title { get; set; }
         [Display(Name = "Описание")]
         public string Description { get; set; }
-        public int Choices { get; set; }
+        public string Choices { get; set; }
+
+
+        public static IdeaModel GetIdea(int id)
+        {
+            ShareIdeaDBDataContext cont = new ShareIdeaDBDataContext();
+            var idea = cont.Ideas.Where(i => i.id == id).FirstOrDefault();
+            return new IdeaModel()
+            {
+                Id = idea.id,
+                Title = idea.title,
+                Description = idea.description,
+                Choices = idea.choices
+            };
+        }
     }
 }

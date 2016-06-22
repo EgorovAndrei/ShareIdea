@@ -1,5 +1,11 @@
-﻿@{
+﻿@model ShareIdea.Models.IdeaModel 
+@{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Идея</h2>
+@Html.LabelFor(model => model.Title)
+<p>@Model.Title</p>
+@Html.LabelFor(model => model.Description)
+<p>@Model.Description</p>
+<p>@Model.Choices</p>
